@@ -1,0 +1,248 @@
+﻿@model Crud.Core.Model.EmpDetails
+@{
+    Layout = null;
+}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <title>Form</title>
+    <script src="./js/site.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+    <script src="https://kit.fontawesome.com/a10c7f6efa.js" crossorigin="anonymous"></script>
+
+    <style>
+        .a {
+            padding: 0px 0px 35px 0px;
+        }
+        .b{
+           
+            padding: 5px 10px 5px 10px;
+        }
+        
+        body {
+            margin: 0px 383px 10px 341px;
+             /*margin: 0px 383px 10px 300px;*/
+            background-color: lightgreen;
+        }
+
+        form {
+            border: 1px solid black;
+            border-radius: 25px;
+            padding-left: 50px;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            background-color: skyblue;
+        }
+        .usericon{
+            position:absolute;
+            padding: 7px 0px 0px 9px;
+        }
+        input,textarea{
+            padding:0px 0px 0px 35px;
+        }
+    </style>
+
+
+</head>
+@using (Html.BeginForm("Create", "Employee", FormMethod.Post, new { @id ="hemath" }))
+{
+
+
+    <body>
+        <form>
+            <center>
+                <h2 class="a">EMPLOYEE DETAILS</h2>
+            </center>
+            @Html.HiddenFor(a=>a.EmployeeId, new{id="hiddenid"})
+
+            <div class="a">
+                FirstName<span style="color:red;">*</span>
+                <i class="fa-solid fa-user usericon"></i>
+                @Html.TextBoxFor(a=>a.FirstName,new{@placeholder="Enter your FirstName"})
+            </div>
+            <div class="a">
+                LastName<span style="color:red;">*</span>
+                <i class="fa-solid fa-user usericon"></i>
+                @Html.TextBoxFor(a=>a.LastName,new{@placeholder="Enter your LastName"})
+            </div>
+            <div class="a">
+                DateOfJoining<span style="color:red;">*</span>
+                @Html.TextBoxFor(a=>a.Date,new { type="date" })
+            </div>
+            <div class="a">
+                Age<span style="color:red;">*</span>
+                <i class="fa-solid fa-cake-candles usericon"></i>
+                @Html.TextBoxFor(a=>a.Age,new{@placeholder="Enter your Age"})
+            </div>
+            <div class="a">
+                Experience<span style="color:red;">*</span>
+                <i class="fa-solid fa-graduation-cap usericon"></i>
+                @Html.TextBoxFor(a=>a.Experience,new{@placeholder="Enter your Experience"})
+            </div>
+            <div class="a">
+                Contact Number<span style="color:red;">*</span>
+                <i class="fa-solid fa-phone usericon "></i>
+                @Html.TextBoxFor(a=>a.ContactNumber,new{@placeholder="Enter your ContactNumber"})
+            </div>
+            <div class="a">
+                Address<span style="color:red;">*</span>
+                <i class="fa-solid fa-location-dot usericon"></i>
+                @Html.TextAreaFor(a=>a.Address,new{@placeholder="Enter Your Address"})
+            </div>
+            <div class="a">
+                <label>Work Location</label>
+                @Html.DropDownList("LocationId" , new SelectList(ViewBag.Location, "LocationId", "WorkLocation"), "Select Location")
+            </div>
+            <div class="a">
+                Password<span style="color:red;">*</span>
+                <i class="fa-solid fa-key usericon"></i>
+                @Html.PasswordFor(a=>a.Password , new{id="password", @placeholder="Enter your Password"})
+                <input type="checkbox" onclick="myFunction()">Show Password
+            </div>
+           
+            <div class="a">
+                Confirm Password<span style="color:red;">*</span>
+                <i class="fa-solid fa-key usericon"></i>
+                @Html.PasswordFor(a=>a.ConfirmPassword ,new{id="Confirm_Password",@placeholder="ReEnter Your Password"})
+                <input type="checkbox" onclick="newFunction()">Show Password
+            </div>
+            <div class="a">
+                <button type="submit" class="btn btn-success"  , onclick="Submit()", id="mybutton">Save</button>
+                <input type="button" class="b" value="Go-To_Read" onclick="location.href='@Url.Action("Read", "Employee")'" />
+             @*   <button class="btn btn-primary mb-3" type="reset">Reset</button>*@
+            </div>
+
+
+        </form>
+    </body>
+}
+<script>
+    $().ready(function () {
+
+        $("#hemath").validate({
+            // in 'rules' user have to specify all the constraints for respective fields
+            rules:
+            {
+
+                FirstName:
+                {
+                    required: true,
+                    lettersonly: true,
+                },
+                LastName:
+                {
+                    required: true,
+                    lettersonly: true,
+                },
+
+               
+                Date:
+                {
+                    required: true,
+                },
+
+                Age:
+                {
+                    required: true,
+                },
+                Experience:
+                {
+                    required: true,
+                },
+                ContactNumber:
+                {
+
+                    required: true,
+                    number: true,
+                    maxlength: 13,
+                },
+                Address:
+                {
+                    required: true,
+                },
+                Password:
+                {
+                    required: true,
+                },
+                ConfirmPassword:
+                {
+                    required: true,
+                    equalTo: "#password"
+                }
+
+            },
+
+            messages:
+            {
+                FirstName:
+                {
+                    required: " Please enter a FirstName",
+                    lettersonly: "Only alphabets are valid"
+                },
+                LastName:
+                {
+                    required: " Please enter a FirstName",
+                    lettersonly: "Only alphabets are valid"
+                },
+
+                
+                Date:
+                {
+                    required: " Please enter a DateOFJoining"
+                },
+
+
+                Age:
+                {
+                    required: " Please enter a Age"
+                },
+                Experience:
+                {
+                    required: " Please enter a Experience"
+                },
+                ContactNumber:
+
+                {
+                    required: " Please enter a Phone Number",
+                    maxlength: " Your number must not exceed 13 characters",
+                },
+                Address:
+                {
+                    required: " Please enter a Address",
+                },
+
+
+                Email:
+                {
+                    required: " Please enter a EmailId",
+                },
+
+                Password:
+                {
+                    required: " Please enter a password",
+                },
+                ConfirmPassword:
+                {
+                    required: " Please enter a password again",
+                    equalTo: " Please enter the same password as entered above"
+                }
+            }
+
+        });
+        var eid = $("#hiddenid").val();
+        if (eid != 0) {
+            $("#mybutton").html("Update");
+        }
+    });
+
+
+    function Submit() {
+        if ($("#hemath").validate()) {
+            $("#hemath").submit();
+        }
+    }
+
+
+   
+</script>

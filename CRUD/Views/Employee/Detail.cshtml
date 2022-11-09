@@ -1,0 +1,56 @@
+﻿@model Crud.Core.Model.EmpDetails
+
+@{
+    Layout = null;
+}
+
+<head>
+
+</head>
+<body>
+    <div>
+        <label>EmployeeId:</label>  
+        @Html.DisplayFor(a=>a.EmployeeId)
+    </div>
+    <div>
+        <label>FirstName: </label>      
+        @Html.DisplayFor(a=>a.FirstName)
+    </div>
+    <div>
+        <label>LastName: </label>
+        @Html.DisplayFor(a=>a.LastName)
+    </div>
+    <div>
+        <label>DateOfJoining: </label>
+        @Html.DisplayFor(a=>a.Date)
+    </div>
+    <div>
+        <label>Age:</label>
+        @Html.DisplayFor(a=>a.Age)
+    </div>
+    <div>
+        <label>Experience:</label>
+        @Html.DisplayFor(a=>a.Experience)
+    </div>
+    <div>
+        <label>ContactNumber:</label>
+        @Html.DisplayFor(a=>a.ContactNumber)
+    </div>
+    <div>
+        <label>Address:</label>
+        @Html.DisplayFor(a=>a.Address)
+    </div>
+    <div>
+        <label>WorkLocation:</label>
+        @Html.DisplayFor(a=>a.WorkLocation)
+    </div>
+    <div>
+        <label>Password:</label>
+        @Html.DisplayFor(a=>a.Password)
+    </div>
+    <div>
+        <label>ConfirmPassword:</label>
+        @Html.DisplayFor(a=>a.ConfirmPassword)
+    </div>
+
+</body>
